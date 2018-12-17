@@ -18,6 +18,35 @@ client.on("message", async message => {
 	if (command == 'snap') {
 		if (args == message.channel.name) {
 			message.channel.send("*snap*");
+			let count = 0;
+			let deleteUnpinned = () => {
+				message.channel.fetchMessages({limit: 100 })
+					.then(messages => {
+						let messagesArray = messages.array();
+						for (i = 0; i < messagesArray.length; i++) {
+							if (!messagesArray[i].pinned) {
+								messagesArray[i].delete()
+									.then(function() {
+										count++;
+										if (count >= 100) {
+											deleteUnpinned();
+										}
+									})
+									.catch(function() {
+										count++;
+										if (count >= 100) {
+											deleteUnpinned();
+										}
+									})
+							}
+						}
+					})
+					.catch(console.error);
+			}
+			deleteUnpinned();
+			message.channel.send(":fire:");
+			message.channel.send(":boxing_glove:");
+			message.channel.send("Balance achieved.");
 		}else{
 			message.channel.send(`**You didn't type the channel name correctly.**`);
 			message.channel.send(`I need to be sure you know what you're about to do.`);
