@@ -12,7 +12,7 @@ client.on("message", async message => {
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
 
-	
+
 	const snapTrigger = `snap ${message.channel.name}`;
 
 	if (command == 'snap') {
@@ -48,15 +48,15 @@ client.on("message", async message => {
 			message.channel.send(":boxing_glove:");
 			message.channel.send("Balance achieved.");
 		}else{
-			message.channel.send(`**You didn't type the channel name correctly.**`);
-			message.channel.send(`I need to be sure you know what you're about to do.`);
+			message.channel.send("**Confirm the channel you're on.**");
+			message.channel.send("I need to be sure you know what you're about to do.");
 			message.channel.send(`Type \`${config.prefix} ${snapTrigger}\` to snap this channel.`);
-			message.channel.send(`**This will DELETE all unpinned messages in this channel. You have been warned.**`);
+			message.channel.send("**This will DELETE all unpinned messages in this channel. You have been warned.**");
 		}
 	}else{
 		message.channel.send("Fun isn't something one considers when balancing a Discord server.");
 		message.channel.send(`Type \`${config.prefix} ${snapTrigger}\`. When I'm done, all pinned messages on this channel will still exist.`);
-		message.channel.send(`**This will DELETE all unpinned messages in this channel. You have been warned.**`);
+		message.channel.send("**This will DELETE all unpinned messages in this channel. You have been warned.**");
 	}
 });
 
